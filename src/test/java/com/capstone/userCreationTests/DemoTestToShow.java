@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-import com.capstone.util.UtilityClass;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -31,7 +30,7 @@ public class DemoTestToShow {
 
 		// This will wait for the application to be loaded completely before performing
 		// next action at every step
-		driver.manage().timeouts().implicitlyWait(UtilityClass.IMPLICIT_WAIT, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		// This will load the URL provided
 		driver.get("http://demo.guru99.com/test/newtours/");
@@ -39,17 +38,18 @@ public class DemoTestToShow {
 		// Maximise the browser window
 		driver.manage().window().maximize();
 
+		for(int i=1; i<=10; i++)
+		{
 		// Find the particular element by using the locator in html and click on it
 		driver.findElement(By.xpath("//*[contains(text(),'REGISTER')]")).click();
 
 		// Find the particular element by using the locator in html and types the
 		// characters in it
-		driver.findElement(By.xpath("//input[@name='firstName']")).sendKeys("DemoFNAme");
-		driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("DemoLName");
+		driver.findElement(By.xpath("//input[@name='firstName']")).sendKeys("DemoFNAme " + i);
+		driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("DemoLName " + i);
 		driver.findElement(By.xpath("//input[@name='phone']")).sendKeys("9876543210");
 		driver.findElement(By.xpath("//input[@id='userName']")).sendKeys("Project@CMRCollege.com");
-		driver.findElement(By.xpath("//input[@name='address1']")).sendKeys("CMR College");
-		//driver.findElement(By.xpath("//input[@name='address2']")).sendKeys("Yelhanka");
+		driver.findElement(By.xpath("//input[@name='address1']")).sendKeys("CMR College" + i);
 		driver.findElement(By.xpath("//input[@name='city']")).sendKeys("Bangalore");
 		driver.findElement(By.xpath("//input[@name='state']")).sendKeys("Karnataka");
 		driver.findElement(By.xpath("//input[@name='postalCode']")).sendKeys("560001");
@@ -58,12 +58,12 @@ public class DemoTestToShow {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("Project@CMRCollege.com");
 		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("12345678");
 		driver.findElement(By.xpath("//input[@name='confirmPassword']")).sendKeys("12345678");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//input[@name='submit']")).click();
 		String successMessage = driver.findElement(By.xpath("//font[contains(text(),'Thank you for registering.')]"))
 				.getText();
 		String expectedMessage = "Thank you for registering";
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 
 		// Verify success message is displayed after user creation
 		if (successMessage.contains(expectedMessage)) {
@@ -74,9 +74,9 @@ public class DemoTestToShow {
 		driver.findElement(By.xpath("//a[contains(text(),'sign-in')]")).click();
 		driver.findElement(By.xpath("//input[@name='userName']")).sendKeys("Project@CMRCollege.com");
 		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("12345678");
-		Thread.sleep(5000);
+ 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//input[@name='submit']")).click();
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 
 		// Verify user is in home page after login
 		if (driver.findElement(By.xpath("//a[contains(text(),'SIGN-OFF')]")).isDisplayed()) {
@@ -86,8 +86,10 @@ public class DemoTestToShow {
 
 		// Clicks on the Sign out button
 		driver.findElement(By.xpath("//a[contains(text(),'SIGN-OFF')]")).click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
+		}
 
+		
 		// Close the browser
 		driver.quit();
 

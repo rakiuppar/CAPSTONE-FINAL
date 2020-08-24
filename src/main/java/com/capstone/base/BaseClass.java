@@ -10,8 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.capstone.util.UtilityClass;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass 
@@ -47,8 +45,8 @@ public class BaseClass
 			driver = new FirefoxDriver(); 
 		}
 		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().pageLoadTimeout(UtilityClass.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(UtilityClass.IMPLICIT_WAIT, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(prop.getProperty("url"));
 		driver.manage().window().maximize();
 	}
