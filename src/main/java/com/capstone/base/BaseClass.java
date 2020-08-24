@@ -12,6 +12,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.capstone.util.UtilityClass;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class BaseClass 
 {
 	public static WebDriver driver;
@@ -30,24 +32,25 @@ public class BaseClass
 		} 
 	}
 	
-//	public static void initialization()
-//	{
-//		String browserName = prop.getProperty("browser");
-//		
-//		if(browserName.equals("chrome"))
-//		{
-//			System.setProperty("webdriver.chrome.driver", "BrowserDrivers\\chromedriver.exe");	
-//			driver = new ChromeDriver(); 
-//		}
-//		else if(browserName.equals("firefox"))
-//		{
-//			System.setProperty("webdriver.gecko.driver", "BrowserDrivers\\geckodriver.exe");	
-//			driver = new FirefoxDriver(); 
-//		}
-//		//driver.manage().deleteAllCookies();
-//		driver.manage().timeouts().pageLoadTimeout(UtilityClass.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-//		driver.manage().timeouts().implicitlyWait(UtilityClass.IMPLICIT_WAIT, TimeUnit.SECONDS);
-//		driver.get(prop.getProperty("url"));
-//		driver.manage().window().maximize();
-//	}
+	public static void initialization()
+	{
+		String browserName = prop.getProperty("browser");
+		
+		if(browserName.equals("chrome"))
+		{
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver(); 
+		}
+		else if(browserName.equals("firefox"))
+		{
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver(); 
+		}
+		driver.manage().deleteAllCookies();
+		driver.manage().timeouts().pageLoadTimeout(UtilityClass.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(UtilityClass.IMPLICIT_WAIT, TimeUnit.SECONDS);
+		driver.get(prop.getProperty("url"));
+		driver.manage().window().maximize();
+	}
+	
 }

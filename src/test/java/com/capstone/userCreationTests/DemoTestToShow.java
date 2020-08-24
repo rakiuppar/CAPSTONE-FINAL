@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 import com.capstone.util.UtilityClass;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class DemoTestToShow {
 	// Maven: We need Selenium and testNG jar/packages. Maven downloads the packages
 	// and store inside the project automatically.
@@ -19,8 +21,9 @@ public class DemoTestToShow {
 
 		// Setting the driver path in order to create communication channel between the
 		// script and the browser
-		System.setProperty("webdriver.chrome.driver", "BrowserDrivers\\chromedriver.exe");
-
+		//System.setProperty("webdriver.chrome.driver", "BrowserDrivers\\chromedriver.exe");
+		WebDriverManager.chromedriver().setup();
+		
 		// Creating a Webdriver instance of type Chrome driver, to initiate the browser
 		// to open the application
 		// This command will open the empty Chrome browser
@@ -46,7 +49,7 @@ public class DemoTestToShow {
 		driver.findElement(By.xpath("//input[@name='phone']")).sendKeys("9876543210");
 		driver.findElement(By.xpath("//input[@id='userName']")).sendKeys("Project@CMRCollege.com");
 		driver.findElement(By.xpath("//input[@name='address1']")).sendKeys("CMR College");
-		driver.findElement(By.xpath("//input[@name='address2']")).sendKeys("Yelhanka");
+		//driver.findElement(By.xpath("//input[@name='address2']")).sendKeys("Yelhanka");
 		driver.findElement(By.xpath("//input[@name='city']")).sendKeys("Bangalore");
 		driver.findElement(By.xpath("//input[@name='state']")).sendKeys("Karnataka");
 		driver.findElement(By.xpath("//input[@name='postalCode']")).sendKeys("560001");
@@ -56,7 +59,7 @@ public class DemoTestToShow {
 		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("12345678");
 		driver.findElement(By.xpath("//input[@name='confirmPassword']")).sendKeys("12345678");
 		Thread.sleep(5000);
-		driver.findElement(By.xpath("//input[@name='register']")).click();
+		driver.findElement(By.xpath("//input[@name='submit']")).click();
 		String successMessage = driver.findElement(By.xpath("//font[contains(text(),'Thank you for registering.')]"))
 				.getText();
 		String expectedMessage = "Thank you for registering";
@@ -64,7 +67,7 @@ public class DemoTestToShow {
 
 		// Verify success message is displayed after user creation
 		if (successMessage.contains(expectedMessage)) {
-			System.out.println("User has been created successfully");
+			System.out.println("New User has been created successfully");
 		}
 
 		// Login to application after user creation
@@ -72,12 +75,12 @@ public class DemoTestToShow {
 		driver.findElement(By.xpath("//input[@name='userName']")).sendKeys("Project@CMRCollege.com");
 		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("12345678");
 		Thread.sleep(5000);
-		driver.findElement(By.xpath("//input[@name='login']")).click();
+		driver.findElement(By.xpath("//input[@name='submit']")).click();
 		Thread.sleep(5000);
 
 		// Verify user is in home page after login
 		if (driver.findElement(By.xpath("//a[contains(text(),'SIGN-OFF')]")).isDisplayed()) {
-			System.out.println("User has logged in successfully");
+			System.out.println("New User has logged in successfully");
 			System.out.println("--------------------------------");
 		}
 
